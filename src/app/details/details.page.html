@@ -1,13 +1,31 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>details</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Pokémon Details</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding" *ngIf="pokemon">
+    <ion-card>
+        <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}">
+        <ion-card-header>
+            <ion-card-title>{{ pokemon.name | uppercase }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <p>Height: {{ pokemon.height }}</p>
+            <p>Weight: {{ pokemon.weight }}</p>
+            <p>Base Experience: {{ pokemon.base_experience }}</p>
+            <ion-list>
+                <ion-item *ngFor="let ability of pokemon.abilities">
+                    {{ ability.ability.name }}
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
+
+<ion-button *ngIf="!pokemonService.isFavorite(pokemon.name)" (click)="addFavorite(pokemon.name)">
+    Add to Favorites
+</ion-button>
+<ion-button *ngIf="pokemonService.isFavorite(pokemon.name)" (click)="removeFavorite(pokemon.name)">
+    Remove from Favorites
+</ion-button>
