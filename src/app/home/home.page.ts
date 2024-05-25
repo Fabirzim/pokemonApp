@@ -8,6 +8,7 @@ import { PokemonService } from '../pokemon.service';
     styleUrls: ['home.page.scss'],
     standalone: true,
     imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+    providers:[PokemonService]
 })
 export class HomePage implements OnInit {
 
